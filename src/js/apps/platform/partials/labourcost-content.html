@@ -1,13 +1,43 @@
 <div ng-controller="ctrlLabourCost">
 	<h2>Labour cost report</h2>
-	
+
 	<div class="list-table">
-		<div class="header-row">
-			<div class="col-25">Example heading</div>
+		<div class="header-row multi-line">
+			<div class="col-6 text-left">Payroll Provider</div>
+			<div class="col-2 text-left">Worker</div>
+			<div class="col-3 text-left">Compliance score</div>
+			<div class="col-4 text-right">Gross pay(£)</div>
+			<div class="col-2 text-right">payroll admin(£)</div>
+			<div class="col-4 text-right">Labour Cost(£)</div>
+			<div class="col-3 text-right">work force</div>
 		</div>
-		
-		<div class="body-row">
-			<div class="col-25">Example data entry</div>
+
+		<div class="body-row" ng-repeat="dc in costdata.directContractors">
+			<div class="col-6 text-left">{{dc.name}}</div>
+			<div class="col-2 text-left number">{{dc.workerCount}}</div>
+			<div class="col-3 text-left">{{getCompliance(dc.complianceStats.Total)}}%</div>
+			<div class="col-4 text-right number">{{numberWithCommas(dc.grossPayTotal)}}</div>
+			<div class="col-2 text-right">{{dc.payrollAdminTotal}}</div>
+			<div class="col-4 text-right number">{{numberWithCommas(dc.labourCostTotal)}}</div>
+			<div class="col-3 text-right">{{getWorkForce(dc.workerCount)}}%</div>
+		</div>
+		<div class="body-row" ng-repeat="dc in costdata.providers">
+			<div class="col-6 text-left">{{dc.name}}</div>
+			<div class="col-2 text-left number">{{dc.workerCount}}</div>
+			<div class="col-3 text-left">{{getCompliance(dc.complianceStats.Total)}}%</div>
+			<div class="col-4 text-right number">{{numberWithCommas(dc.grossPayTotal)}}</div>
+			<div class="col-2 text-right">{{dc.payrollAdminTotal}}</div>
+			<div class="col-4 text-right number">{{numberWithCommas(dc.labourCostTotal)}}</div>
+			<div class="col-3 text-right">{{getWorkForce(dc.workerCount)}}%</div>
+		</div>
+		<div class="action-row">
+			<div class="col-6 text-left">{{total.name}}</div>
+			<div class="col-2 text-left number">{{total.workerCount}}</div>
+			<div class="col-3 text-left">{{getCompliance(total.complianceStats.Total)}}%</div>
+			<div class="col-4 text-right number">{{numberWithCommas(total.grossPayTotal)}}</div>
+			<div class="col-2 text-right">{{total.payrollAdminTotal}}</div>
+			<div class="col-4 text-right number">{{numberWithCommas(total.labourCostTotal)}}</div>
+			<div class="col-3 text-right">{{getWorkForce(total.workerCount)}}%</div>
 		</div>
 	</div>
 </div>
